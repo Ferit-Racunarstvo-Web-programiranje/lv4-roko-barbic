@@ -5,18 +5,26 @@
     <title>Web Shop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
+    
   </head>
-
+  
   <body>
     <h1>Web Shop</h1>
     <?php
       session_start();
-      if (!empty($_SESSION["shopping_cart"])) {
+      if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+        echo "<script language='javascript'>";
+        echo "alert('$message')";
+        echo "</script>";
+        unset($_SESSION['message']);
+      }
+      if(!empty($_SESSION["shopping_cart"])) {
         $cart_count = count(array_keys($_SESSION["shopping_cart"]));
-      } else {
+      }
+      else{
         $cart_count = 0;
       }
-      session_write_close();
     ?>
     <nav>
         <a href="index.php"><button>Home</button></a>
@@ -25,34 +33,29 @@
       <a href="order.php"><button>Order information</button></a>
       <a href="admin.php"><button>Admin Login</button></a>
     </nav>
-
     <div class="info">
-      <h3>
-         Hello!
-         Explore our wide range of products and I hope you will enjoy this shopping experience.
-      </h3>
-      <h2>New Items</h2>
+     
+      <h2>Products</h2>
     </div>
-
     <div class="items-grid">
       <?php
+    
         require "database.php";
         $conn = get_connection();
         $result = mysqli_query($conn, "SELECT * FROM products");
-        
-        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-          echo "<div class=item>";
-          echo "<img src=$row[image] alt='Missing'>";
-          echo "<h2>$row[name]</h2>";
-          echo "<h3>Price: $row[price]$</h3>";
-          echo "<form method='POST'>";
-          echo "<div class='form-row'>";
-          echo "<label for=$row[name]-quantity>Quantity: </label>";
-          echo "<input type='number' name=$row[name]-quantity min='1' max='50' value='1'>";
-          echo "</div>";
-          echo "<input type='submit' value='Add to cart' class='add-to-cart-btn' name=$row[name]-insert>";
-          echo "</form>";
-          echo "</div>";
+		    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            echo "<div class=item>";
+            echo "<img src=$row[image] alt='Missing'>";
+            echo "<h2>$row[name]</h2>";
+            echo "<h3>Price: $row[price]$</h3>";
+            echo "<form method='POST'>";
+            echo "<div class='form-row'>";
+            echo "<label for=$row[name]-quantity>Quantity: </label>";
+            echo "<input type='number' name=$row[name]-quantity min='1' max='50' value='1'>";
+            echo "</div>";
+            echo "<input type='submit' value='Add to cart' class='add-to-cart-btn' name=$row[name]-insert>";
+            echo "</form>";
+            echo "</div>";
           if(isset($_POST[$row["name"]."-insert"])){
             $itemArray = array(
               $row["name"] =>array(
@@ -85,7 +88,7 @@
 
         mysqli_free_result($result);
         mysqli_close($conn);
-        session_write_close(); 
+        session_write_close();
       ?>
     </div>
   </body>
