@@ -7,6 +7,15 @@ Također dodatan dio koji sam napravio je da kupac pri unosu artikala u košaric
 
 Folder s nazivom webshoplv44 sadrži datoteke za bazu podataka.
 
+Sql query:
+- za dodavanje admina
+INSERT INTO `users`(`email`, `password`) VALUES ('admin@admin.com','admin123');
+-za dodavanje proizvoda
+INSERT INTO `products`(`name`, `price`, `image`, `quantity`) VALUES ('apple','2.22','https://media.istockphoto.com/id/495878092/photo/red-apple.jpg?s=612x612&w=0&k=20&c=M2ndFI1v2erJM18q1Cd1QCM8jqBlRKLc1nLE9BNp-EY=','10');
+INSERT INTO `products`(`name`, `price`, `image`, `quantity`) VALUES ('banana','3.45','https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg','12');
+INSERT INTO `products`(`name`, `price`, `image`, `quantity`) VALUES ('ananas','8.45','https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ananas~May_2008-1.jpg/1200px-Ananas~May_2008-1.jpg','4');
+
+
 # LV 4 - PHP
 
 U ovoj vježbi zadatak je nadodati dinamičke fukncionalnosti u web stranicu koristeći znanja JavaScripta, HTML-a iz prethodnih vježbi i povezati ih s PHP-om. U repozitoriju se nalaze datoteke `index.html` i `style.css` u kojima se nalazi osnovni kostur stranice za web trgovinu (iz prošle vježbe). U datoteci `script.js` nalazi se početna točka za JavaScript iz prethodne vježbe. Potrebno je koristiti sve do sada naučeno, kako biste ostvarili funkcionalnosti. Sve dokumente i foldere s lokalne strane postaviti na github u main branch. 
