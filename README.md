@@ -3,6 +3,9 @@
 Kada se administrator ulogira koriste se cookie i on ostaje je ulogiran sve dok mu traje aktivni cookie ili dok se on ne odjavi.
 Također dodatan dio koji sam napravio je da kupac pri unosu artikala u košaricu odabere količinu te ako je odabrao preveliku količinu određenog proizvoda i na stanju nema dovoljno tog proizvoda, korisniku se prikazuje poruka kako trenutna količina koju on želi je nedostupna te mu se u košaricu sprema artikal s največom dostupnom količinom. Na dalje u pregledu košarice također je moguće odabrati količinu proizvoda te se također i tamo ogračinava unos prekomjerne količine određenog proizvoda.
 
+# baza podataka
+
+Folder s nazivom webshoplv44 sadrži datoteke za bazu podataka.
 
 # LV 4 - PHP
 
