@@ -27,14 +27,12 @@
 <body>
     <h1>Web Shop</h1>
     <?php
+        if (isset($_COOKIE['user_logged_in']) && $_COOKIE['user_logged_in'] === 'true') {
+            // User is logged in based on the cookie, proceed to the dashboard
+            header("Location: dashboard.php");
+            exit();
+        }
       session_start();
-      if (isset($_SESSION['message'])) {
-        $message = $_SESSION['message'];
-        echo "<script language='javascript'>";
-        echo "alert('$message')";
-        echo "</script>";
-        unset($_SESSION['message']);
-      }
       if(!empty($_SESSION["shopping_cart"])) {
         $cart_count = count(array_keys($_SESSION["shopping_cart"]));
       }
@@ -75,54 +73,50 @@
         </div>
     </div>
     <?php
-    //session_start();
-    $host = 'localhost';
-    $username = 'root';
-    $password = '';
-    $database = 'webshoplv44';
+   require "database.php";
+   $connection = get_connection();
+   
 
-    $connection = mysqli_connect($host, $username, $password, $database);
-
-    // Function to authenticate user credentials
+    
     function authenticateUser($connection, $email, $password) {
-        // Query to retrieve user record based on email
+        
         $query = "SELECT * FROM users WHERE email = '$email'";
         $result = mysqli_query($connection, $query);
 
         if (mysqli_num_rows($result) === 1) {
             $user = mysqli_fetch_assoc($result);
 
-            // Verify password
-            //if (password_verify($password, $user['password'])) {
+           
             if($password == $user['password']){
-                // Password matches, user is authenticated
+               
                 return true;
             }
         }
 
-        // Invalid email or password
+       
         return false;
     }
 
-    // Check if the login form is submitted
+   
     if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        // Authenticate user
+      
         if (authenticateUser($connection, $email, $password)) {
-            // Successful login
+          
+            setcookie('user_logged_in', 'true', time() + 3600);
             header("Location: dashboard.php");
             exit();
         } else {
-            // Invalid credentials
+           
             echo "Invalid email or password.";
         }
     }
 
-    // Close database connection
+   
     mysqli_close($connection);
-    //session_write_close();
+   
     ?>
 </body>
 </html>

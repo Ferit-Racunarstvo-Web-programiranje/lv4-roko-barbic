@@ -15,7 +15,7 @@
         <a href="productsAdmin.php"><button>Browse products</button></a>
         <a href="add_product.php"><button>Add new product</button></a>
         <a href="ordersAdmin.php"><button>Orders</button></a>
-        <a href="index.php"><button>Logout</button></a>
+        <a href="logout.php"><button>Logout</button></a>
     </nav>
 
     <div class="orders-container">
@@ -25,6 +25,11 @@
         // Assuming you have a function to establish database connection called "get_connection()"
         require "database.php";
         $conn = get_connection();
+
+        if (!isset($_COOKIE['user_logged_in'])) {
+            header("Location: admin.php"); 
+            exit();
+        }
 
         // Retrieve orders from the database
         $query = "SELECT * FROM orders";

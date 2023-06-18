@@ -1,5 +1,7 @@
 
-aaaa
+# Dodatni dijelovi
+Kada se administrator ulogira koriste se cookie i on ostaje je ulogiran sve dok mu traje aktivni cookie ili dok se on ne odjavi.
+Također dodatan dio koji sam napravio je da kupac pri unosu artikala u košaricu odabere količinu te ako je odabrao preveliku količinu određenog proizvoda i na stanju nema dovoljno tog proizvoda, korisniku se prikazuje poruka kako trenutna količina koju on želi je nedostupna te mu se u košaricu sprema artikal s največom dostupnom količinom. Na dalje u pregledu košarice također je moguće odabrati količinu proizvoda te se također i tamo ogračinava unos prekomjerne količine određenog proizvoda.
 
 
 # LV 4 - PHP
@@ -60,7 +62,7 @@ Admin login:
     
     [****************dodatno****************] 
     
-    - [ ]  Ako administrator ugasi stranicu i ponovno ode na dashboard url, automatski
+    - [X]  Ako administrator ugasi stranicu i ponovno ode na dashboard url, automatski
     je logiran sve dok mu traje aktivni cookie. Administrator ne smije doći na navedeni URL dashboard-a ako se nije prethodno prijavio. Također, administratorova šifra unutar baze podataka mora biti enkriptirana (odabrati MD5 ili SHA256 kriptografsku metodu).
 
 - [X]  Ako je administrator unutar nadozrne ploče (dashboard) i klikne na **Proizvodi** unutar menija, otvorit će mu se liste svih trenutno kreiranih proizvoda (ako postoje) s prikazom slike, ime proizvoda, cijena i dostupna količina. Proizvodi se čitaju iz spremljene tablice u bazi. Kada administrator odabere opciju dodavanje proizvoda, odnosno klik na button "dodaj novi proizvod", logika ga vodi na novu stranicu gdje može ispuniti podatke o željenom novom proizvodu. Administrator potvrđuje svoje podatke o proizvodu tako što će kliknuti na gumb o potvrdi proizvoda. Kada administrator potvrdi proizvod, logika ga vraća na prethodnu stranicu gdje može vidjeti novi dodani proizvod unutar liste proizvoda. Ako korisnik ili administrator odu na početnu stranicu, prikazat će im se novo dodani proizvod na npr. "Novo u ponudi" dijelu gdje će se proizvodi dinamički povući iz baze podataka.

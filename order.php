@@ -32,7 +32,6 @@
             echo "<script language='javascript'>";
             echo "alert('Cart is empty.')";
             echo "</script>";
-            session_write_close();
             exit;
             }
             $total_cart_price = 0;
@@ -45,7 +44,7 @@
             echo "</div>";
             }
             echo "<h2 class=cart-totatal-price>Cart total price: $total_cart_price$</h2>";
-            session_write_close();
+          
         ?>
         </div>
 
@@ -71,7 +70,7 @@
                 echo "<script language='javascript'>";
                 echo "alert('Cart is empty.')";
                 echo "</script>";
-                session_write_close();
+               
                 exit;
             }
         
@@ -98,10 +97,17 @@
             mysqli_query($conn, "INSERT INTO orders (user_id, first_name, last_name, address, products, total_price)
                                 VALUES (1, '$first_name', '$last_name', '$address', '$products', $total_cart_price)");
 
-session_start();    
+            session_start();    
             unset($_SESSION["shopping_cart"]);
             $_SESSION["message"] = "Your order was requested successfully.";
-            header("Location: index.php");
+            if (isset($_SESSION['message'])) {
+                $message = $_SESSION['message'];
+                echo "<script language='javascript'>";
+                echo "alert('$message')";
+                echo "</script>";
+                unset($_SESSION['message']);
+              }
+              header("Location: index.php");
         }
         session_write_close();
         ?>

@@ -15,7 +15,7 @@
         <a href="dashboard.php"><button>Home</button></a>
       <a href="productsAdmin.php"><button>Browse products</button></a>
       <a href="add_product.php"><button>Add new product</button></a>
-      <a href="index.php"><button>Logout</button></a>
+      <a href="logout.php"><button>Logout</button></a>
     </nav>
 
     <div class="info">
@@ -27,6 +27,12 @@
       <?php
         require "database.php";
         $conn = get_connection();
+
+        if (!isset($_COOKIE['user_logged_in'])) {
+          header("Location: admin.php"); 
+          exit();
+      }
+      
         $result = mysqli_query($conn, "SELECT * FROM products");
         
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {

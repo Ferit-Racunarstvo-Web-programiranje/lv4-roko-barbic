@@ -29,7 +29,7 @@
     <div class="info">
       <h3>
          Hello!
-         Explore our wide range of products and I hope you will enjoy this shopping experience.
+         Explore our wide range of products and enjoy this shopping experience.
       </h3>
       <h2>New Items</h2>
     </div>

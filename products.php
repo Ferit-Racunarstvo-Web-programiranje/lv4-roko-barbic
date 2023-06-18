@@ -39,7 +39,6 @@
     </div>
     <div class="items-grid">
       <?php
-    
         require "database.php";
         $conn = get_connection();
         $result = mysqli_query($conn, "SELECT * FROM products");
@@ -56,32 +55,58 @@
             echo "<input type='submit' value='Add to cart' class='add-to-cart-btn' name=$row[name]-insert>";
             echo "</form>";
             echo "</div>";
-          if(isset($_POST[$row["name"]."-insert"])){
-            $itemArray = array(
-              $row["name"] =>array(
-              'id'=>$row["id"],
-              'name'=>$row["name"],
-              'image'=>$row["image"],
-              'price'=>$row["price"],
-              'quantity'=>(int)($_POST[$row["name"]."-quantity"])),
-            );
-            if(empty($_SESSION["shopping_cart"])) {
-              $_SESSION["shopping_cart"] = $itemArray;
-              $_SESSION["message"] = "Product added successfully.";
-            }
-            else {
-              $array_keys = array_keys($_SESSION["shopping_cart"]);
-              if(in_array($row["name"],$array_keys)) {
-                $_SESSION["message"] = "Product is already inside your cart.";
-              } 
-              else {
-                $_SESSION["shopping_cart"] = array_merge(
-                  $_SESSION["shopping_cart"],
-                  $itemArray
-                );
-                $_SESSION["message"] = "Product added successfully.";
-              }
-            }
+          
+            if (isset($_POST[$row["name"]."-insert"])) {
+                $quantity = (int)$_POST[$row["name"]."-quantity"];
+                $db_quantity = $row["quantity"];
+          
+                if ($quantity <= $db_quantity) {
+                  $itemArray = array(
+                    $row["name"] => array(
+                      'id' => $row["id"],
+                      'name' => $row["name"],
+                      'image' => $row["image"],
+                      'price' => $row["price"],
+                      'quantity' => $quantity, // Store entered quantity
+                    ),
+                  );
+          
+                  if (empty($_SESSION["shopping_cart"])) {
+                    $_SESSION["shopping_cart"] = $itemArray;
+                    $_SESSION["message"] = "Product added successfully.";
+                  } else {
+                    $array_keys = array_keys($_SESSION["shopping_cart"]);
+                    if (in_array($row["name"], $array_keys)) {
+                      $_SESSION["message"] = "Product is already in your cart.";
+                    } else {
+                      $_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"], $itemArray);
+                      $_SESSION["message"] = "Product added successfully.";
+                    }
+                  }
+                } else {
+                  $itemArray = array(
+                    $row["name"] => array(
+                      'id' => $row["id"],
+                      'name' => $row["name"],
+                      'image' => $row["image"],
+                      'price' => $row["price"],
+                      'quantity' => $db_quantity, // Store available quantity
+                    ),
+                  );
+          
+                  if (empty($_SESSION["shopping_cart"])) {
+                    $_SESSION["shopping_cart"] = $itemArray;
+                    $_SESSION["message"] = "Product added successfully, but the quantity is $db_quantity because that is all we have.";
+                  } else {
+                    $array_keys = array_keys($_SESSION["shopping_cart"]);
+                    if (in_array($row["name"], $array_keys)) {
+                      $_SESSION["message"] = "Product is already in your cart.";
+                    } else {
+                      $_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"], $itemArray);
+                      $_SESSION["message"] = "Product added successfully, but the quantity is $db_quantity because that is all we have.";
+                    }
+                  }
+                }
             header("Location: products.php");
           }
         }

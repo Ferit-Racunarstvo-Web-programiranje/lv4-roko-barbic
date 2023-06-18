@@ -2,15 +2,17 @@
 require "database.php";
 $connection = get_connection();
 
-// Check if the form is submitted
+if (!isset($_COOKIE['user_logged_in'])) {
+    header("Location: admin.php"); 
+    exit();
+}
+
 if (isset($_POST['submit'])) {
-    // Retrieve the form data
     $name = $_POST['name'];
     $price = $_POST['price'];
     $image = $_POST['image'];
     $quantity = $_POST['quantity'];
 
-    // Insert the new item into the database
     $query = "INSERT INTO products (name, price, image, quantity) VALUES ('$name', '$price', '$image', '$quantity')";
     $insertResult = mysqli_query($connection, $query);
 
@@ -38,7 +40,7 @@ if (isset($_POST['submit'])) {
     <a href="dashboard.php"><button>Home</button></a>
       <a href="productsAdmin.php"><button>Browse products</button></a>
       <a href="add_product.php"><button>Add new product</button></a>
-      <a href="index.php"><button>Logout</button></a>
+      <a href="logout.php"><button>Logout</button></a>
     </nav>
     <div class="form-container2">
     <h2>Add New Item</h2>
@@ -47,13 +49,13 @@ if (isset($_POST['submit'])) {
         <input type="text" name="name" id="name" required><br>
 
         <label for="price">Price:</label>
-        <input type="number" step="0.01" name="price" id="price" required><br>
+        <input type="number" min="0" step="0.01" name="price" id="price" required><br>
 
         <label for="image">Image link:</label>
         <textarea name="image" id="image" required></textarea><br>
 
         <label for="quantity">Quantity:</label>
-        <input type="number" step="1" name="quantity" id="quantity" value="<?php echo htmlspecialchars($product['quantity']); ?>" required><br>
+        <input type="number" min="0" step="1" name="quantity" id="quantity" value="<?php echo htmlspecialchars($product['quantity']); ?>" required><br>
 
         <input type="submit" name="submit" value="Add Item">
     </form>
