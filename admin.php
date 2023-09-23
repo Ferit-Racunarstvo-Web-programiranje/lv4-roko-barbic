@@ -25,7 +25,6 @@
     <title>Admin Login</title>
 </head>
 <body>
-    <h1>Web Shop</h1>
     <?php
         if (isset($_COOKIE['user_logged_in']) && $_COOKIE['user_logged_in'] === 'true') {
             // User is logged in based on the cookie, proceed to the dashboard
@@ -33,6 +32,7 @@
             exit();
         }
       session_start();
+      $currentPage = basename($_SERVER['PHP_SELF']);
       if(!empty($_SESSION["shopping_cart"])) {
         $cart_count = count(array_keys($_SESSION["shopping_cart"]));
       }
@@ -40,12 +40,18 @@
         $cart_count = 0;
       }
     ?>
-    <nav>
-        <a href="index.php"><button>Home</button></a>
-      <a href="products.php"><button>Browse shop</button></a>
-      <a href="cart.php"><button>Cart<span class="cart-badge"><?php echo $cart_count; ?></span></button></a>
-      <a href="order.php"><button>Order information</button></a>
-      <a href="admin.php"><button>Admin Login</button></a>
+     <nav>
+      <div class="logo-container">
+      <h1>Art Shop</h1>
+      <a href="index.php"><img src="./photos/98dff1ef135960c3b148ebeba4a80377.jpg"></a>
+      </div>
+      <div>
+        <a href="index.php"><button <?php if ($currentPage == 'index.php') echo 'class="active"'; ?>>Home</button></a>
+        <a href="products.php"><button <?php if ($currentPage == 'products.php') echo 'class="active"'; ?>>Browse shop</button></a>
+        <a href="cart.php"><button <?php if ($currentPage == 'cart.php') echo 'class="active"'; ?>>Cart<span class="cart-badge"><?php echo $cart_count; ?></span></button></a>
+        <a href="order.php"><button <?php if ($currentPage == 'order.php') echo 'class="active"'; ?>>Order information</button></a>
+        <a class="login-button" href="admin.php"><button <?php if ($currentPage == 'admin.php') echo 'class="active"'; ?>>Admin Login</button></a>
+    </div>
     </nav>
  <!--    <h2>Admin Login</h2>
     <form action="admin.php" method="POST">

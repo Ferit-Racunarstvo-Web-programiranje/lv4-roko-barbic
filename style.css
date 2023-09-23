@@ -1,7 +1,7 @@
 /* CSS variables */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
+    --primary-color: #ffc24d;
+    --secondary-color: #24180a;
     --font-size-base: 16px;
     --font-family-base: Arial, sans-serif;
 }
@@ -13,6 +13,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    /* background-color: #ccbfb0 ; */
 }
 
 h1 {
@@ -72,8 +73,8 @@ img {
     width: 250px;
     height: fit-content;
     background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 12px;
+    border: 5px solid #ccc;
+    border-radius: 20px;
     border-color: var(--primary-color);
     padding: 1em;
   }
@@ -101,9 +102,9 @@ img {
 
 .add-to-cart-btn {
     background-color: var(--primary-color);
-    color: white;
+    color: #24180a;
     border: none;
-    border-radius: 3px;
+    border-radius: 20px;
     padding: 0.5em 1em;
     font-size: 1.2em;
     cursor: pointer;
@@ -228,7 +229,7 @@ h1{
     text-decoration: underline;
   text-decoration-color:    var(--primary-color);
 }
-
+/* navigacija
 nav {
     display: flex;
     justify-content: center;
@@ -261,7 +262,61 @@ nav a button:hover{
     margin-top: 30px;
     text-decoration: underline;
   text-decoration-color:    var(--primary-color);
+} */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffc24d;
+  padding: 10px;
 }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container h1 {
+  margin: 0;
+  margin-right: 10px; /* Adjust the margin as needed */
+  color: #24180a    ; /* Set the color of the h1 */
+  text-decoration: none;
+}
+
+.logo-container img {
+  max-height: 65px; /* Adjust the height as needed */
+}
+
+button {
+  background-color: #ffc24d;
+  color: #24180a  ;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  text-decoration: underline;
+}
+
+.cart-badge {
+  background-color: #ff5722;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.login-button button{
+  background-color: #24180a;
+  color: #ffc24d;
+  border-radius: 20px;
+}
+button.active {
+  text-decoration: underline;
+}
+
 /*cart item*/
 .cart-item {
     display: flex;
@@ -313,9 +368,9 @@ nav a button:hover{
   
   .cart-proceed-to-order-info button {
     background-color: var(--primary-color);
-    color: white;
+    color: #24180a;
     border: none;
-    border-radius: 3px;
+    border-radius: 20px;
     padding: 0.5em 1em;
     font-size: 1.2em;
     cursor: pointer;
@@ -375,13 +430,14 @@ nav a button:hover{
   /*admin products*/
   .update-btn{
     background-color: var(--primary-color);
-    color: white;
+    color: var(--secondary-color);
     border: none;
-    border-radius: 3px;
+    border-radius: 20px;
     padding: 0.5em 1em;
     font-size: 1.2em;
     cursor: pointer;
     margin-top: auto;
+
   }
   .update-btn:hover{
     opacity: 0.7;
@@ -446,7 +502,7 @@ nav a button:hover{
   text-align: center;
   }
   .info h3{
-    margin-left: 3%;
+    text-align: center;
   }
 /*orders*/
 .orders-container {

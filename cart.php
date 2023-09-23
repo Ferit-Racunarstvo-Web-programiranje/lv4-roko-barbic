@@ -8,21 +8,27 @@
   </head>
 
   <body>
-    <h1>Web Shop</h1>
     <?php
       session_start();
+      $currentPage = basename($_SERVER['PHP_SELF']);
       if (!empty($_SESSION["shopping_cart"])) {
         $cart_count = count(array_keys($_SESSION["shopping_cart"]));
       } else {
         $cart_count = 0;
       }
     ?>
-   <nav>
-        <a href="index.php"><button>Home</button></a>
-      <a href="products.php"><button>Browse shop</button></a>
-      <a href="cart.php"><button>Cart<span class="cart-badge"><?php echo $cart_count; ?></span></button></a>
-      <a href="order.php"><button>Order information</button></a>
-      <a href="admin.php"><button>Admin Login</button></a>
+  <nav>
+      <div class="logo-container">
+      <h1>Art Shop</h1>
+      <a href="index.php"><img src="./photos/98dff1ef135960c3b148ebeba4a80377.jpg"></a>
+      </div>
+      <div>
+        <a href="index.php"><button <?php if ($currentPage == 'index.php') echo 'class="active"'; ?>>Home</button></a>
+        <a href="products.php"><button <?php if ($currentPage == 'products.php') echo 'class="active"'; ?>>Browse shop</button></a>
+        <a href="cart.php"><button <?php if ($currentPage == 'cart.php') echo 'class="active"'; ?>>Cart<span class="cart-badge"><?php echo $cart_count; ?></span></button></a>
+        <a href="order.php"><button <?php if ($currentPage == 'order.php') echo 'class="active"'; ?>>Order information</button></a>
+        <a class="login-button" href="admin.php"><button <?php if ($currentPage == 'admin.php') echo 'class="active"'; ?>>Admin Login</button></a>
+    </div>
     </nav>
 
     <div class="cart-items">
@@ -57,9 +63,9 @@
           }
 
           echo "<input type='number' name=$item[name]-quantity min='1' max='50' value=$item[quantity]>";
-          echo "<input type='submit' value='Change quantity' class='add-to-cart-btn' name=$item[name]-change-quantity>";
+          echo "<input type='submit' style='color: #24180a' value='Change quantity' class='add-to-cart-btn' name=$item[name]-change-quantity>";
           echo "</div>";
-          echo "<input type='submit' value='Remove' class='add-to-cart-btn' name=$item[name]-remove>";
+          echo "<input type='submit' style='color: #24180a' value='Remove' class='add-to-cart-btn' name=$item[name]-remove>";
           echo "</form>";
           echo "</div>";
           if (isset($_POST[$item["name"] . "-remove"])) {
@@ -90,7 +96,7 @@
       ?>
     </div>
 
-    <div class="cart-proceed-to-order-info">
+    <div class="cart-proceed-to-order-info" >
       <a href="order.php"><button>Buy now</button></a>
     </div>
   </body>

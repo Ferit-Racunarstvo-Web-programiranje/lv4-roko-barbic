@@ -1,6 +1,7 @@
 <?php
 require "database.php";
 $connection = get_connection();
+$currentPage = basename($_SERVER['PHP_SELF']);
 
 if (!isset($_COOKIE['user_logged_in'])) {
     header("Location: admin.php"); 
@@ -35,12 +36,20 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1>Web Shop</h1>
+<body>
+ 
     <nav>
-    <a href="dashboard.php"><button>Home</button></a>
-      <a href="productsAdmin.php"><button>Browse products</button></a>
-      <a href="add_product.php"><button>Add new product</button></a>
-      <a href="logout.php"><button>Logout</button></a>
+      <div class="logo-container">
+      <h1>Art Shop</h1>
+      <a href="dashboard.php"><img src="./photos/98dff1ef135960c3b148ebeba4a80377.jpg"></a>
+      </div>
+      <div>
+    <a href="dashboard.php"><button <?php if ($currentPage == 'dashboard.php') echo 'class="active"'; ?>>Home</button></a>
+    <a href="productsAdmin.php"><button <?php if ($currentPage == 'productsAdmin.php') echo 'class="active"'; ?>>Browse products</button></a>
+    <a href="add_product.php"><button <?php if ($currentPage == 'add_product.php') echo 'class="active"'; ?>>Add new product</button></a>
+    <a href="ordersAdmin.php"><button <?php if ($currentPage == 'ordersAdmin.php') echo 'class="active"'; ?>>Orders</button></a>
+    <a class="login-button" href="logout.php"><button <?php if ($currentPage == 'logout.php') echo 'class="active"'; ?>>Logout</button></a>
+</div>
     </nav>
     <div class="form-container2">
     <h2>Add New Item</h2>
@@ -57,7 +66,7 @@ if (isset($_POST['submit'])) {
         <label for="quantity">Quantity:</label>
         <input type="number" min="0" step="1" name="quantity" id="quantity" value="<?php echo htmlspecialchars($product['quantity']); ?>" required><br>
 
-        <input type="submit" name="submit" value="Add Item">
+        <input style="color: #24180a;" type="submit" name="submit" value="Add Item">
     </form>
     </div>
 </body>

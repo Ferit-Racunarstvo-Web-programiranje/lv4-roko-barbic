@@ -8,14 +8,24 @@
   </head>
   
   <body>
-    <h1>Web Shop</h1>
+  <?php
+    session_start();
+    $currentPage = basename($_SERVER['PHP_SELF']);
+    session_write_close();
+?>
     
-    <nav>
-        <a href="dashboard.php"><button>Home</button></a>
-        <a href="productsAdmin.php"><button>Browse products</button></a>
-        <a href="add_product.php"><button>Add new product</button></a>
-        <a href="ordersAdmin.php"><button>Orders</button></a>
-        <a href="logout.php"><button>Logout</button></a>
+ <nav>
+      <div class="logo-container">
+      <h1>Art Shop</h1>
+      <a href="dashboard.php"><img src="./photos/98dff1ef135960c3b148ebeba4a80377.jpg"></a>
+      </div>
+      <div>
+    <a href="dashboard.php"><button <?php if ($currentPage == 'dashboard.php') echo 'class="active"'; ?>>Home</button></a>
+    <a href="productsAdmin.php"><button <?php if ($currentPage == 'productsAdmin.php') echo 'class="active"'; ?>>Browse products</button></a>
+    <a href="add_product.php"><button <?php if ($currentPage == 'add_product.php') echo 'class="active"'; ?>>Add new product</button></a>
+    <a href="ordersAdmin.php"><button <?php if ($currentPage == 'ordersAdmin.php') echo 'class="active"'; ?>>Orders</button></a>
+    <a class="login-button" href="logout.php"><button <?php if ($currentPage == 'logout.php') echo 'class="active"'; ?>>Logout</button></a>
+</div>
     </nav>
 
     <div class="orders-container">

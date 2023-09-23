@@ -2,13 +2,13 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Web Shop</title>
+    <title>Art Shop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
 
   <body>
-    <h1>Web Shop</h1>
+    
     <?php
       session_start();
       if (!empty($_SESSION["shopping_cart"])) {
@@ -16,14 +16,21 @@
       } else {
         $cart_count = 0;
       }
+      $currentPage = basename($_SERVER['PHP_SELF']);
       session_write_close();
     ?>
     <nav>
-        <a href="index.php"><button>Home</button></a>
-      <a href="products.php"><button>Browse shop</button></a>
-      <a href="cart.php"><button>Cart<span class="cart-badge"><?php echo $cart_count; ?></span></button></a>
-      <a href="order.php"><button>Order information</button></a>
-      <a href="admin.php"><button>Admin Login</button></a>
+      <div class="logo-container">
+      <h1>Art Shop</h1>
+      <a href="index.php"><img src="./photos/98dff1ef135960c3b148ebeba4a80377.jpg"></a>
+      </div>
+      <div>
+        <a href="index.php"><button <?php if ($currentPage == 'index.php') echo 'class="active"'; ?>>Home</button></a>
+        <a href="products.php"><button <?php if ($currentPage == 'products.php') echo 'class="active"'; ?>>Browse shop</button></a>
+        <a href="cart.php"><button <?php if ($currentPage == 'cart.php') echo 'class="active"'; ?>>Cart<span class="cart-badge"><?php echo $cart_count; ?></span></button></a>
+        <a href="order.php"><button <?php if ($currentPage == 'order.php') echo 'class="active"'; ?>>Order information</button></a>
+        <a class="login-button" href="admin.php"><button <?php if ($currentPage == 'admin.php') echo 'class="active"'; ?>>Admin Login</button></a>
+    </div>
     </nav>
 
     <div class="info">
