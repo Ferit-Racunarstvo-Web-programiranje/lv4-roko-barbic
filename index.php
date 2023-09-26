@@ -38,14 +38,17 @@
          Hello!
          Explore our wide range of products and enjoy this shopping experience.
       </h3>
-      <h2>New Items</h2>
+      <h2>New Items</h2>;
+      
+
+      
     </div>
 
     <div class="items-grid">
       <?php
         require "database.php";
         $conn = get_connection();
-        $result = mysqli_query($conn, "SELECT * FROM products");
+        $result = mysqli_query($conn, "SELECT * FROM products WHERE created_at >= DATE_SUB(NOW(), INTERVAL 3 day)");;
         
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
           echo "<div class=item>";
