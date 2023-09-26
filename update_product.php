@@ -102,11 +102,11 @@ if (isset($_POST['submit'])) {
         <label for="quantity">Quantity:</label>
         <input type="number" min="0" step="1" name="quantity" id="quantity" value="<?php echo htmlspecialchars($product['quantity']); ?>" required><br>
 
-        <input type="submit" name="submit" value="Save Changes">
+        <input style="color: #24180a" type="submit" name="submit" value="Save Changes">
     </form>
 
     <form action="" method="POST">
-        <input type="submit" name="delete" value="Delete Product" class="delete-btn">
+        <input style="color: #24180a"type="submit" name="delete" value="Delete Product" class="delete-btn">
     </form>
     </div>
 </body>
