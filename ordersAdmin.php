@@ -32,7 +32,6 @@
         <h2>Orders</h2>
 
         <?php
-        // Assuming you have a function to establish database connection called "get_connection()"
         require "database.php";
         $conn = get_connection();
 
@@ -41,13 +40,10 @@
             exit();
         }
 
-        // Retrieve orders from the database
         $query = "SELECT * FROM orders";
         $result = mysqli_query($conn, $query);
 
-        // Check if any orders exist
         if (mysqli_num_rows($result) > 0) {
-            // Loop through each order and display the details
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='order-item'>";
                 echo "<h3>Order ID: " . $row['id'] . "</h3>";
@@ -61,7 +57,6 @@
             echo "<p>No orders found.</p>";
         }
 
-        // Close the database connection
         mysqli_close($conn);
         ?>
 
